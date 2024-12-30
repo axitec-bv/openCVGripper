@@ -17,7 +17,8 @@ blurred = cv2.GaussianBlur(gray, (5, 5), 0)
 # Use Canny to detect edges
 edges = cv2.Canny(blurred, 20, 50)
 
-# Show the edges for tuning
+# Save and show the edges
+cv2.imwrite("glazen_edges.jpg", edges)
 cv2.imshow("Edges", edges)
 
 # Find contours
@@ -29,7 +30,8 @@ contour_image = image.copy()
 # Draw all contours for visualization
 cv2.drawContours(contour_image, contours, -1, (255, 0, 0), 2)
 
-# Show the contours for tuning
+# Save and show the contours
+cv2.imwrite("glazen_contours.jpg", contour_image)
 cv2.imshow("Contours", contour_image)
 
 # Iterate over all contours
@@ -38,7 +40,6 @@ for contour in contours:
     x, y, w, h = cv2.boundingRect(contour)
     
     # Filter out very small boxes (likely noise)
-    # You can adjust the threshold area to suit your needs
     if w * h > 9000:
         # Draw the rectangle around the contour
         cv2.rectangle(
@@ -49,7 +50,7 @@ for contour in contours:
             2
         )
 
-        # You could place a generic label such as "Object"
+        # Place a label with object height
         cv2.putText(
             image,
             f"Object (h = {h}px)",
@@ -60,7 +61,8 @@ for contour in contours:
             2
         )
 
-# Show the output image with detected objects
+# Save and show the output image with detected objects
+cv2.imwrite("glazen_contour.jpg", image)
 cv2.imshow("Detected Objects", image)
 
 # Wait until a key is pressed, then close all windows

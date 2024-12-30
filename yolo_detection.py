@@ -42,7 +42,7 @@ result_img, _ = predict_and_detect(model, image, classes=[], conf=0.5)
 cv2.imshow("Image", result_img)
 
 # Save the result image
-cv2.imwrite("glazen_pred.jpeg", result_img)
+cv2.imwrite("glazen_yolo.jpeg", result_img)
 
 # Wait for a key press and close the window
 cv2.waitKey(0)
