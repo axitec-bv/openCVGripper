@@ -65,7 +65,7 @@ This method uses the YOLO (You Only Look Once) object detection model to detect 
    ```bash
    python contour_detection.py
    ```
-   This generates the output image `glazen_contour.jpeg`.
+   This generates the output image `glazen_contour.jpg`.
 
 3. **Run the YOLO-Based Script:**
    ```bash
