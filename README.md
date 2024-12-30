@@ -1,110 +1,127 @@
-# Object Detection and Contour Analysis
+# Object Detection: Contour-Based vs. YOLO Model
 
-This repository contains a Python script that uses OpenCV to detect and label objects in an image based on contours and bounding boxes. The script processes the image step-by-step, and saves intermediate and final results for better debugging and visualization.
-
----
-
-## Features
-
-1. **Preprocessing**:
-   - Converts the image to grayscale.
-   - Applies Gaussian blurring to reduce noise.
-
-2. **Edge Detection**:
-   - Uses the Canny edge detection algorithm.
-
-3. **Contour Detection**:
-   - Identifies and draws contours on the image.
-
-4. **Bounding Box Filtering**:
-   - Filters out small noise using a minimum area threshold.
-   - Labels detected objects with their heights in pixels.
-
-5. **Save Outputs**:
-   - Saves the following images for review:
-     - Edges
-     - Contours
-     - Final detected objects
+This project demonstrates two approaches for object detection in images: a traditional contour-based method and a deep-learning-based YOLO model. Both methods are applied to the same image (`glazen.jpeg`) for comparison.
 
 ---
 
-## Prerequisites
+## Methods Overview
 
-Ensure the following are installed:
+### 1. **Contour-Based Detection**
+This method leverages OpenCV's image processing capabilities to detect objects based on edges and contours.
 
+**Steps:**
+- Convert the image to grayscale.
+- Apply Gaussian blurring to reduce noise.
+- Use the Canny edge detection algorithm to find edges.
+- Detect contours and filter them by size.
+- Draw bounding boxes and label objects with their heights in pixels.
+
+**Pros:**
+- Simple and lightweight.
+- No need for pre-trained models or large dependencies.
+
+**Cons:**
+- Cannot classify objects.
+- Sensitive to noise and lighting conditions.
+
+**Output:**
+- Saved as `glazen_contour.jpeg`.
+
+### 2. **YOLO Model Detection**
+This method uses the YOLO (You Only Look Once) object detection model to detect and classify objects.
+
+**Steps:**
+- Load a pre-trained YOLO model (`yolo11x.pt`).
+- Perform inference to detect objects in the image.
+- Draw bounding boxes and label objects with their class names and heights in pixels.
+
+**Pros:**
+- Highly accurate and robust.
+- Capable of object classification.
+
+**Cons:**
+- Requires pre-trained weights.
+- Computationally heavier compared to contour-based methods.
+
+**Output:**
+- Saved as `glazen_yolo.jpeg`.
+
+---
+
+## How to Run
+
+### Prerequisites
 - Python 3.x
-- OpenCV library (`pip install opencv-python`)
-- NumPy library (`pip install numpy`)
+- Required Libraries:
+  ```bash
+  pip install opencv-python numpy matplotlib ultralytics
+  ```
 
----
+### Steps
 
-## How to Use
+1. Place the input image (`glazen.jpeg`) in the working directory.
 
-1. Place the input image in the same directory as the script. Rename it to `glazen.jpeg` (or update the path in the script).
-2. Run the script using:
-
+2. **Run the Contour-Based Script:**
    ```bash
-   python object_detection.py
+   python contour_detection.py
    ```
+   This generates the output image `glazen_contour.jpeg`.
 
-3. Check the saved output images in the same directory:
-   - `edges_output.jpg`
-   - `contours_output.jpg`
-   - `detected_objects_output.jpg`
+3. **Run the YOLO-Based Script:**
+   ```bash
+   python yolo_detection.py
+   ```
+   This generates the output image `glazen_yolo.jpeg`.
 
 ---
 
-## Output Explanation
+## Results and Comparison
 
-### 1. Edges Output
+### Contour-Based Detection
+- **Strengths:**
+  - Lightweight and fast for basic object localization.
+- **Weaknesses:**
+  - Cannot classify objects or handle complex scenes.
 
-This image shows the detected edges using the Canny edge detection algorithm.
+### YOLO Detection
+- **Strengths:**
+  - Precise object detection with classification.
+  - Handles complex scenes effectively.
+- **Weaknesses:**
+  - Requires more computational resources.
 
-![Edges Output](edges_output.jpg)
+### Visual Comparison
+Run the comparison script to view the outputs side by side:
 
-### 2. Contours Output
+**Contour-Based Detection Output:**
+![Contour Detection](glazen_contour.jpeg)
 
-This image visualizes all detected contours drawn over the input image.
-
-![Contours Output](contours_output.jpg)
-
-### 3. Detected Objects
-
-The final output highlights objects detected based on size, enclosed in green bounding boxes with height labels.
-
-![Detected Objects](detected_objects_output.jpg)
+**YOLO Detection Output:**
+![YOLO Detection](glazen_yolo.jpeg)
 
 ---
 
 ## Customization
 
-- **Canny Thresholds**:
-  Modify the thresholds for edge detection in the script:
+### Contour-Based Method
+- Adjust the Canny edge detection thresholds:
   ```python
   edges = cv2.Canny(blurred, 20, 50)
   ```
+- Modify the minimum contour area to filter noise:
+  ```python
+  if w * h > 9000:
+  ```
 
-- **Minimum Area Threshold**:
-  Adjust the `w * h > 9000` condition to detect smaller or larger objects.
+### YOLO Model
+- Update the YOLO model weights by replacing `yolo11x.pt` with your desired model.
+- Adjust the confidence threshold:
+  ```python
+  conf=0.5
+  ```
+- Specify classes to detect using the `classes` parameter.
 
 ---
 
-## Example Command
-
-```bash
-python object_detection.py
-```
-
----
-
-## Results
-
-### Input Image
-Provide your input image, e.g., `glazen.jpeg`.
-
-### Outputs
-- `edges_output.jpg`
-- `contours_output.jpg`
-- `detected_objects_output.jpg`
-
-These outputs will be saved automatically after running the script.
+## Conclusion
+This project highlights the trade-offs between traditional and deep-learning-based methods for object detection. Choose the method based on your requirements for accuracy, speed, and classification capabilities.
