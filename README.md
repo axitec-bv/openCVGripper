@@ -94,7 +94,7 @@ This method uses the YOLO (You Only Look Once) object detection model to detect 
 Run the comparison script to view the outputs side by side:
 
 **Contour-Based Detection Output:**
-![Contour Detection](glazen_contour.jpeg)
+![Contour Detection](glazen_contour.jpg)
 
 **YOLO Detection Output:**
 ![YOLO Detection](glazen_yolo.jpeg)
