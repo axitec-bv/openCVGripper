@@ -50,33 +50,6 @@ This method uses the YOLO (You Only Look Once) object detection model to detect 
 
 ---
 
-## How to Run
-
-### Prerequisites
-- Python 3.x
-- Required Libraries:
-  ```bash
-  pip install opencv-python numpy matplotlib ultralytics
-  ```
-
-### Steps
-
-1. Place the input image (`glazen.jpeg`) in the working directory.
-
-2. **Run the Contour-Based Script:**
-   ```bash
-   python contour_detection.py
-   ```
-   This generates the output image `glazen_contour.jpg`.
-
-3. **Run the YOLO-Based Script:**
-   ```bash
-   python yolo_detection.py
-   ```
-   This generates the output image `glazen_yolo.jpeg`.
-
----
-
 ## Results and Comparison
 
 ### Contour-Based Detection
@@ -102,6 +75,35 @@ Run the comparison script to view the outputs side by side:
 **YOLO Detection Output:**
 
 ![YOLO Detection](glazen_yolo.jpeg)
+
+---
+
+
+
+## How to Run
+
+### Prerequisites
+- Python 3.x
+- Required Libraries:
+  ```bash
+  pip install opencv-python numpy matplotlib ultralytics
+  ```
+
+### Steps
+
+1. Place the input image (`glazen.jpeg`) in the working directory.
+
+2. **Run the Contour-Based Script:**
+   ```bash
+   python contour_detection.py
+   ```
+   This generates the output image `glazen_contour.jpg`.
+
+3. **Run the YOLO-Based Script:**
+   ```bash
+   python yolo_detection.py
+   ```
+   This generates the output image `glazen_yolo.jpeg`.
 
 ---
 
