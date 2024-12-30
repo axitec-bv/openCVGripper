@@ -13,7 +13,9 @@ This method leverages OpenCV's image processing capabilities to detect objects b
 - Convert the image to grayscale.
 - Apply Gaussian blurring to reduce noise.
 - Use the Canny edge detection algorithm to find edges.
+  ![Edges](glazen_edges.jpg)
 - Detect contours and filter them by size.
+  ![Counters](glazen_contours.jpg)
 - Draw bounding boxes and label objects with their heights in pixels.
 
 **Pros:**
@@ -94,9 +96,11 @@ This method uses the YOLO (You Only Look Once) object detection model to detect 
 Run the comparison script to view the outputs side by side:
 
 **Contour-Based Detection Output:**
+
 ![Contour Detection](glazen_contour.jpg)
 
 **YOLO Detection Output:**
+
 ![YOLO Detection](glazen_yolo.jpeg)
 
 ---
